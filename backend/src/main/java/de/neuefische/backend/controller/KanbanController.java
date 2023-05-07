@@ -33,4 +33,9 @@ public class KanbanController {
     public ToDo editToDo(@RequestBody ToDo toDoToEdit){
         return toDoService.editToDo(toDoToEdit);
     }
+
+    @DeleteMapping("todo/{id}")
+    public ToDo deleteToDo (@PathVariable String id){
+        return toDoService.deleteToDo(id);
+    }
 }

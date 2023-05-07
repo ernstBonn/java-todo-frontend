@@ -30,4 +30,8 @@ public class ToDoService {
     public ToDo editToDo(ToDo toDoToEdit) {
         return toDoRepo.editToDo(toDoToEdit);
     }
+
+    public ToDo deleteToDo(String id) {
+        return toDoRepo.deleteToDo(id);
+    }
 }

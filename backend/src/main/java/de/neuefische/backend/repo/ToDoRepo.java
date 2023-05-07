@@ -30,4 +30,8 @@ public class ToDoRepo {
     public ToDo editToDo(ToDo toDoToEdit) {
        return toDoMap.replace(toDoToEdit.getId(), toDoToEdit);
     }
+
+    public ToDo deleteToDo(String id) {
+        return toDoMap.remove(id);
+    }
 }
