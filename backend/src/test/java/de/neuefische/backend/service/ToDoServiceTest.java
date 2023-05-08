@@ -38,10 +38,20 @@ ToDoService toDoService = new ToDoService(toDoRepo, randomID);
     List<ToDo> expected = List.of(toDo);
     //when
     when(toDoRepo.listToDos()).thenReturn(expected);
-    List result = toDoService.listToDos();
+    List actual = toDoService.listToDos();
     //then
-    assertEquals(expected, result);
+    assertEquals(expected, actual);
     verify(toDoRepo).listToDos();
 }
-
+@Test
+    void testAddToDo_shouldReturnAddedToDo(){
+    //given
+    ToDo expected = new ToDo("123", "someToDo", OPEN);
+    //when
+    when(toDoRepo.addToDo(expected)).thenReturn(expected);
+    ToDo actual = toDoService.addToDo(expected);
+    //then
+    assertEquals(expected, actual);
+    verify(toDoRepo).addToDo(expected);
+}
 }
