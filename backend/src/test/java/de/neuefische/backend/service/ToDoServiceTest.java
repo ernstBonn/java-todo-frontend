@@ -22,13 +22,12 @@ ToDoService toDoService = new ToDoService(toDoRepo, randomID);
 @Test
     void testListToDos_shouldReturnAnEmptyList(){
     //given
-    Map<String, ToDo> givenMap = new HashMap<>();
-    List<ToDo> expected = new ArrayList<>();
+//    List<ToDo> expected = new ArrayList<>();  <-- unnecessary !!
     //when
-    when(toDoRepo.listToDos()).thenReturn(new ArrayList<>(givenMap.values()));
+    when(toDoRepo.listToDos()).thenReturn(new ArrayList<>());
     List result = toDoService.listToDos();
     //then
-    assertEquals(expected, result);
+    assertEquals(new ArrayList(), result);
     verify(toDoRepo).listToDos();
 }
 @Test
@@ -43,7 +42,7 @@ ToDoService toDoService = new ToDoService(toDoRepo, randomID);
     assertEquals(expected, actual);
     verify(toDoRepo).listToDos();
 }
-@Test
+@Test //needs adjustment with id !!
     void testAddToDo_shouldReturnAddedToDo(){
     //given
     ToDo expected = new ToDo("123", "someToDo", OPEN);
@@ -53,5 +52,16 @@ ToDoService toDoService = new ToDoService(toDoRepo, randomID);
     //then
     assertEquals(expected, actual);
     verify(toDoRepo).addToDo(expected);
+}
+@Test
+    void testDeleteToDo_shouldDeleteToDoById(){
+    //given
+    ToDo expected = new ToDo("123", "someToDo", OPEN);
+    when(toDoRepo.deleteToDo("123")).thenReturn(expected);
+    //when
+    ToDo actual = toDoService.deleteToDo("123");
+    //then
+    verify(toDoRepo).deleteToDo("123");
+    assertEquals(expected, actual);
 }
 }
