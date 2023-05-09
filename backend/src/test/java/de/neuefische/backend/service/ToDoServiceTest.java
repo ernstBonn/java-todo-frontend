@@ -2,6 +2,7 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.model.ToDo;
 import de.neuefische.backend.repo.ToDoRepo;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -62,6 +63,17 @@ ToDoService toDoService = new ToDoService(toDoRepo, randomID);
     ToDo actual = toDoService.deleteToDo("123");
     //then
     verify(toDoRepo).deleteToDo("123");
+    assertEquals(expected, actual);
+}
+@Test
+    void testGetToDo_shouldReturnToDoById(){
+    //given
+    ToDo expected = new ToDo("123", "someToDo", OPEN);
+    when(toDoRepo.getToDo("123")).thenReturn(expected);
+    //when
+    ToDo actual = toDoService.getToDo("123");
+    //then
+    verify(toDoRepo).getToDo("123");
     assertEquals(expected, actual);
 }
 }
